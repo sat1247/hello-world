@@ -43,7 +43,7 @@ pipeline {
 		  environment name: "GIT_GOAL", value: "checkout"
 		}
 		steps {
-		  dir("D:/pipeline/rm") {
+		  dir("D:/pipeline/rm/appcode") {
 		    bat("git clean -fd")
 		    bat("git pull origin master")
 		    //bat("git pull")
