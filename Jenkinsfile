@@ -64,8 +64,8 @@ pipeline {
 		             // withMaven(maven:'Maven_3_3_9', mavenLocalRepo: '.repository',mavenSettingsConfig:'my-config') {
 			      bat("mvn -Dmaven.repo.local=.repository ${MVN_GOAL} -Denv=local -P=Public")
 				archive "./dol-public-web/target/*.war" 
-		              bat("mvn -Dmaven.repo.local=.repository ${MVN_GOAL} -Denv=local -P=Idp")
-			      archive "./dol-idp-web/target/*.war"
+		           /*   bat("mvn -Dmaven.repo.local=.repository ${MVN_GOAL} -Denv=local -P=Idp")
+			      archive "./dol-idp-web/target/*.war"*/
 		           //   archiveArtifacts artifacts: 'dol-idp-web/target/*.war', onlyIfSuccessful: true
 
 		             //    bat 'mvn -P=Batch -Denv=qa clean package'
@@ -87,15 +87,15 @@ pipeline {
      			 {
      				  steps {
            				ansibleTower(
-					        towerServer: 'TestAnsible',						
-						jobTemplate: 'Test Tomcat',
+						towerServer: ${Ansible_Servername},						
+						jobTemplate: ${Ansible_JobTemplate},
 						importTowerLogs: true,
 						inventory: '',						
 					        jobTags: '',
    						limit: '',
 						removeColor: false,
 						verbose: false,
-						credential: 'ce1be52e-1e55-4672-a579-7c9d4a11931b',
+						credential: ${Ansible_Credentials},
 						extraVars: ''
 					)
   				       }
