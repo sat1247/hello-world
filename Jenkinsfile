@@ -7,7 +7,7 @@ pipeline {
 	  string(name: "GIT_GOAL", defaultValue: "clone", description: "")
 	  string(name: "GIT_REPO", defaultValue: "https://github.com/penumalla/appcode.git", description: "")
 	  string(name: "GIT_BRANCH", defaultValue: "master", description: "")
-	  string(name: "MVN_GOAL", defaultValue: "install", description: "")
+	  string(name: "MVN_GOAL", defaultValue: "clean package", description: "")
 	  string(name: "MVN_PROP", defaultValue: "-DskipTests", description: "")
 	  
   }
@@ -51,5 +51,18 @@ pipeline {
 		}
 	  }
    }
+	stage("SCM-Compile/build")
+	      {
+	     dir("D:/pipeline/rmqa/SHWebFramework")
+		   {
+		    //sh("mvn -P=Batch -Denv=qa clean package")
+		   bat("cd")
+		  // withMaven(maven:'Maven_3_3_9', mavenLocalRepo: '.repository',mavenSettingsConfig:'my-config') {
+		      bat("mvn -Dmaven.repo.local=.repository ${MVN_GOAL} -Denv=local -P=Idp")
+		  //    bat 'mvn -P=Batch -Denv=qa clean package'
+		  //}
+         		  
+                  }
+	  }
 
 }
