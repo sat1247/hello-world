@@ -53,16 +53,17 @@ pipeline {
    }
 	stage("SCM-Compile/build")
 	      {
-	     dir("D:/pipeline/rm")
-		   {
-		    //sh("mvn -P=Batch -Denv=qa clean package")
-		   bat("cd")
-		  // withMaven(maven:'Maven_3_3_9', mavenLocalRepo: '.repository',mavenSettingsConfig:'my-config') {
-		      bat("mvn -Dmaven.repo.local=.repository ${MVN_GOAL} -Denv=local -P=Idp")
-		  //    bat 'mvn -P=Batch -Denv=qa clean package'
-		  //}
-         		  
+		      steps {		      
+	                  dir("D:/pipeline/rm")
+		           {
+		             //sh("mvn -P=Batch -Denv=qa clean package")
+		               bat("cd")
+		             // withMaven(maven:'Maven_3_3_9', mavenLocalRepo: '.repository',mavenSettingsConfig:'my-config') {
+		              bat("mvn -Dmaven.repo.local=.repository ${MVN_GOAL} -Denv=local -P=Idp")
+		             //    bat 'mvn -P=Batch -Denv=qa clean package'
+		             //}
+			   }  
                   }
-	  }
+	      }
 
 }
