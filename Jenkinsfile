@@ -63,9 +63,9 @@ pipeline {
 		               bat("cd")
 		             // withMaven(maven:'Maven_3_3_9', mavenLocalRepo: '.repository',mavenSettingsConfig:'my-config') {
 			      bat("mvn -Dmaven.repo.local=.repository ${MVN_GOAL} -Denv=local -P=Public")
-				archive "./dol-public-web/target/*.war", onlyIfSuccessful: true   
+				archive "./dol-public-web/target/*.war" 
 		              bat("mvn -Dmaven.repo.local=.repository ${MVN_GOAL} -Denv=local -P=Idp")
-			      archive "./dol-idp-web/target/*.war", onlyIfSuccessful: true
+			      archive "./dol-idp-web/target/*.war"
 		           //   archiveArtifacts artifacts: 'dol-idp-web/target/*.war', onlyIfSuccessful: true
 
 		             //    bat 'mvn -P=Batch -Denv=qa clean package'
@@ -86,15 +86,15 @@ pipeline {
 	  		 stage("Ansible Build")
      			 {
      				  steps {
-           					 towerServer: ${Ansible_Servername}
-						ansibleTower credential: ${Ansible_Credentials}
-          					  jobTemplate: ${Ansible_JobTemplate}
-							importTowerLogs: true
-						inventory: ''
-						extraVars: ''   
-					        jobTags: ''
-   						limit: ''
-						removeColor: false
+           					 towerServer: ${Ansible_Servername},
+						ansibleTower credential: ${Ansible_Credentials},
+          					  jobTemplate: ${Ansible_JobTemplate},
+							importTowerLogs: true,
+						inventory: "",
+						extraVars: "",   
+					        jobTags: "",
+   						limit: "",
+						removeColor: false,
 						verbose: false
   				       }
  			 }
