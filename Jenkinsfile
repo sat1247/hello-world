@@ -96,7 +96,7 @@ pipeline {
 						removeColor: false,
 						verbose: false,
 						credential: 'ce1be52e-1e55-4672-a579-7c9d4a11931b',
-						extraVars: '''---
+						extraVars: ''
 					)
   				       }
  			 }
