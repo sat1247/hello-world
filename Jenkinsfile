@@ -53,7 +53,7 @@ pipeline {
    }
 	stage("SCM-Compile/build")
 	      {
-	     dir("D:/pipeline/rmqa/SHWebFramework")
+	     dir("D:/pipeline/rm")
 		   {
 		    //sh("mvn -P=Batch -Denv=qa clean package")
 		   bat("cd")
