@@ -9,6 +9,9 @@ pipeline {
 	  string(name: "GIT_BRANCH", defaultValue: "master", description: "")
 	  string(name: "MVN_GOAL", defaultValue: "clean package", description: "")
 	  string(name: "MVN_PROP", defaultValue: "-DskipTests", description: "")
+	  string(name: "Ansible_Credentials", defaultValue: "ce1be52e-1e55-4672-a579-7c9d4a11931b", description: "")
+  	  string(name: "Ansible_JobTemplate", defaultValue: "Test Tomcat", description: "")
+          string(name: "Ansible_Servername", defaultValue: "TestAnsible", description: "")
 	  
   }
   
@@ -80,5 +83,20 @@ pipeline {
 			   }  */
                   }
 	      }
+	  		 stage("Ansible Build")
+     			 {
+     				  steps {
+           					 towerServer: ${Ansible_Servername}
+						ansibleTower credential: ${Ansible_Credentials}
+          					  jobTemplate: ${Ansible_JobTemplate}
+							importTowerLogs: true
+						inventory: ''
+						extraVars: ''   
+					        jobTags: ''
+   						limit: ''
+						removeColor: false
+						verbose: false
+  				       }
+ 			 }
    }
 }
