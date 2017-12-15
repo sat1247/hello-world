@@ -23,7 +23,7 @@ pipeline {
 	   }
 	   steps {
 	     script {
-		   dir("D:/pipeline/rm"){
+		   dir("D:/pipeline/rm/appcode"){
 		   deleteDir()    
 		   if ("${GIT_BRANCH}" != ""){
 		     		 
@@ -54,7 +54,7 @@ pipeline {
 	stage("SCM-Compile/build")
 	      {
 		      steps {		      
-	                  dir("D:/pipeline/rm")
+	                  dir("D:/pipeline/rm/appcode")
 		           {
 		             //sh("mvn -P=Batch -Denv=qa clean package")
 		               bat("cd")
