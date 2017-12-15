@@ -27,7 +27,8 @@ pipeline {
 		   deleteDir()    
 		   if ("${GIT_BRANCH}" != ""){
 		     		 
-		     bat("git clone -b ${GIT_BRANCH} credentialsId: 'd6a6ed5b-498f-47ed-b32e-969811c40abb' url: ${GIT_REPO}")
+	            bat("git clone -b ${GIT_BRANCH} ${GIT_REPO}")
+		    // bat("git clone -b ${GIT_BRANCH} credentialsId: 'd6a6ed5b-498f-47ed-b32e-969811c40abb' url: ${GIT_REPO}")
 		   
 		   }
 		   else {
