@@ -86,16 +86,18 @@ pipeline {
 	  		 stage("Ansible Build")
      			 {
      				  steps {
-           					 towerServer: ${Ansible_Servername},
+           				ansibleTower(
+					        towerServer: ${Ansible_Servername},
 						ansibleTower credential: ${Ansible_Credentials},
-          					  jobTemplate: ${Ansible_JobTemplate},
-							importTowerLogs: true,
-						inventory: "",
-						extraVars: "",   
-					        jobTags: "",
-   						limit: "",
+          				        jobTemplate: ${Ansible_JobTemplate},
+						importTowerLogs: true,
+						inventory: '',						
+					        jobTags: '',
+   						limit: '',
 						removeColor: false,
-						verbose: false
+						verbose: false,
+						extraVars: '''---
+					)
   				       }
  			 }
    }
