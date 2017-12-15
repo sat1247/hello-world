@@ -87,9 +87,9 @@ pipeline {
      			 {
      				  steps {
            				ansibleTower(
-					        towerServer: ${Ansible_Servername},
-						ansibleTower credential: ${Ansible_Credentials},
-          				        jobTemplate: ${Ansible_JobTemplate},
+					        towerServer: "${Ansible_Servername}",
+						ansibleTower credential: "${Ansible_Credentials}",
+						jobTemplate: "${Ansible_JobTemplate}",
 						importTowerLogs: true,
 						inventory: '',						
 					        jobTags: '',
