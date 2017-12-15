@@ -50,7 +50,7 @@ pipeline {
 		  }
 		}
 	  }
-   }
+   
 	stage("SCM-Compile/build")
 	      {
 		      steps {		      
@@ -65,5 +65,5 @@ pipeline {
 			   }  
                   }
 	      }
-
+   }
 }
