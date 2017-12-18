@@ -95,7 +95,7 @@ pipeline {
    						limit: '',
 						removeColor: false,
 						verbose: false,
-						credentialsId: ${Ansible_Credentials},
+						credential: ${Ansible_Credentials},
 						extraVars: ''
 					)
   				       }
