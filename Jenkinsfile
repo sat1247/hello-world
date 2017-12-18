@@ -86,7 +86,7 @@ pipeline {
 	  		 stage("Ansible Build")
      			 {
      				  steps {
-           				ansibleTower(
+           			/*	ansibleTower(
 						towerServer: ${Ansible_Servername},						
 						jobTemplate: ${Ansible_JobTemplate},
 						importTowerLogs: true,
@@ -97,7 +97,19 @@ pipeline {
 						verbose: false,
 						credential: ${Ansible_Credentials},
 						extraVars: ''
-					)
+					)*/
+					   ansibleTower (
+							towerServer: 'TestAnsible',
+							credential: 'Lab Credentials',
+							jobTemplate: 'Test Tomcat',
+							importTowerLogs: true,
+							inventory: 'Lab Inventory',
+							extraVars: '',			  
+							jobTags: '',
+							limit: '',
+							removeColor: false,
+							verbose: false				   
+					   )
   				       }
  			 }
       }
