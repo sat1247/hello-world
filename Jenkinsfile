@@ -20,7 +20,7 @@ pipeline {
 
    
    stages {
-      stage("scm-clone") {
+    /*  stage("scm-clone") {
 	   when {
 	      environment name: "GIT_GOAL", value: "clone"
 	   }
@@ -62,8 +62,9 @@ pipeline {
 		             //sh("mvn -P=Batch -Denv=qa clean package")
 		               bat("cd")
 		             // withMaven(maven:'Maven_3_3_9', mavenLocalRepo: '.repository',mavenSettingsConfig:'my-config') {
-			      bat("mvn -Dmaven.repo.local=.repository ${MVN_GOAL} -Denv=local -P=Public")
+			      bat("mvn -Dmaven.repo.local=D:/pipeline/rm/repository ${MVN_GOAL} -Denv=local -P=Public")
 				archive "./dol-public-web/target/*.war" 
+				
 		           /*   bat("mvn -Dmaven.repo.local=.repository ${MVN_GOAL} -Denv=local -P=Idp")
 			      archive "./dol-idp-web/target/*.war"*/
 		           //   archiveArtifacts artifacts: 'dol-idp-web/target/*.war', onlyIfSuccessful: true
@@ -82,35 +83,36 @@ pipeline {
 		             //}
 			   }  */
                   }
-	      }
-	  		 stage("Ansible Build")
+	      }*/
+	   
+	    stage("Send artifacts")
+	       {
+		      steps {
+			      ws("D:/")	
+			       sshagent (credentials: ['rootforlinuxservers']) {
+                                 sh 'ssh -o StrictHostKeyChecking=no -l root@labansible01 uname -a'  
+				 sh 'ls- al'
+			       //  bat("pscp.exe D:/pipeline/rm/appcode/dol-public-web/target/dol-public-web-0.0.1-SNAPSHOT.war root@labansible01:/var/lib/awx/projects/tomcat/roles/tomcat/files")
+                              }
+			  
+			  }
+		   }
+	  	/*	 stage("Ansible Build")
      			 {
      				  steps {
-           			/*	ansibleTower(
-						towerServer: ${Ansible_Servername},						
-						jobTemplate: ${Ansible_JobTemplate},
-						importTowerLogs: true,
-						inventory: '',						
-					        jobTags: '',
-   						limit: '',
-						removeColor: false,
-						verbose: false,
-						credential: ${Ansible_Credentials},
-						extraVars: ''
-					)*/
-					   ansibleTower (
+           				    ansibleTower (
 							towerServer: 'TestAnsible',
-							credential: 'Lab Credentials',
 							jobTemplate: 'Test Tomcat',
 							importTowerLogs: true,
 							inventory: 'Lab Inventory',
-							extraVars: '',			  
 							jobTags: '',
 							limit: '',
 							removeColor: false,
-							verbose: false				   
+							verbose: true,
+							credential: 'Lab Credentials',
+							extraVars: ''
 					   )
   				       }
- 			 }
+ 			 } */
       }
 }
