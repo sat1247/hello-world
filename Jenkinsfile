@@ -26,7 +26,7 @@ pipeline {
 	   }
 	   steps {
 	     script {
-		   dir("D:/pipeline/rm/appcode"){
+		   dir("D:/pipeline/rm"){
 		   deleteDir()    
 		   if ("${GIT_BRANCH}" != ""){
 		     		 
@@ -95,7 +95,7 @@ pipeline {
    						limit: '',
 						removeColor: false,
 						verbose: false,
-						credentialId: ${Ansible_Credentials},
+						credentialsId: ${Ansible_Credentials},
 						extraVars: ''
 					)
   				       }
