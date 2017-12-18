@@ -20,7 +20,7 @@ pipeline {
 
    
    stages {
-    /*  stage("scm-clone") {
+      stage("scm-clone") {
 	   when {
 	      environment name: "GIT_GOAL", value: "clone"
 	   }
@@ -62,7 +62,7 @@ pipeline {
 		             //sh("mvn -P=Batch -Denv=qa clean package")
 		               bat("cd")
 		             // withMaven(maven:'Maven_3_3_9', mavenLocalRepo: '.repository',mavenSettingsConfig:'my-config') {
-			      bat("mvn -Dmaven.repo.local=D:/pipeline/rm/repository ${MVN_GOAL} -Denv=local -P=Public")
+			      bat("mvn -Dmaven.repo.local=D:/pipeline/rm/.repository ${MVN_GOAL} -Denv=local -P=Public")
 				archive "./dol-public-web/target/*.war" 
 				
 		           /*   bat("mvn -Dmaven.repo.local=.repository ${MVN_GOAL} -Denv=local -P=Idp")
@@ -83,7 +83,7 @@ pipeline {
 		             //}
 			   }  */
                   }
-	      }*/
+	      }
 	   
 	    stage("Send artifacts")
 	       {
