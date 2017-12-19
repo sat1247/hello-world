@@ -4,7 +4,7 @@ pipeline {
 
   parameters {
       string(name: "SLAVE_TARGET", defaultValue: "master", description: "slave machine that responsible to execute tasks")
-	  string(name: "GIT_GOAL", defaultValue: "clone", description: "")
+	  string(name: "GIT_GOAL", defaultValue: "checkout", description: "")
 	  string(name: "GIT_REPO", defaultValue: "https://github.com/penumalla/appcode.git", description: "")
 	  string(name: "GIT_BRANCH", defaultValue: "master", description: "")
 	  string(name: "MVN_GOAL", defaultValue: "clean package", description: "")
