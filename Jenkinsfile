@@ -91,8 +91,9 @@ pipeline {
 			    //ws("D:/")
 			   //   {
 			       sshagent (credentials: ['0ca1c416-5c49-43dd-844b-d3e28ce1d7ff']) {
-				         ls -al				       
-				   //      ssh svcwasadmin@labansible01 uname -a
+				         sh ("ls -al")				       
+				    //   sh ("ssh svcwasadmin@labansible01 uname -a")
+				    //    sh ("ls -al")	
 				 //      	sh "echo SSH_AUTH_SOCK=$SSH_AUTH_SOCK"
       				//	 sh "ls -al $SSH_AUTH_SOCK || true"
       					// sh "ssh -vvv -o StrictHostKeyChecking=no svcwasadmin@labansible01 uname -a"
