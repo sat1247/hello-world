@@ -88,17 +88,19 @@ pipeline {
 	    stage("Send artifacts")
 	       {
 		      steps {
-			    //  ws("D:/")	
-			       sshagent (credentials: ['rootforlinuxservers']) {
+			    ws("D:/")
+			      {
+			      /* sshagent (credentials: ['rootforlinuxservers']) {
 				       	sh 'echo SSH_AUTH_SOCK=$SSH_AUTH_SOCK'
       					 sh 'ls -al $SSH_AUTH_SOCK || true'
       					 sh 'ssh -vvv -o StrictHostKeyChecking=no root@labansible01 uname -a'
 				         sh 'ls -al'
 				         sh 'whoami'
-				      sh 'scp -r D:/pipeline/rm/appcode/dol-public-web/target/dol-public-web-0.0.1-SNAPSHOT.war root@labansible01:/var/lib/awx/projects/tomcat/roles/tomcat/files'
+				      sh 'scp -r D:/pipeline/rm/appcode/dol-public-web/target/dol-public-web-0.0.1-SNAPSHOT.war root@labansible01:/var/lib/awx/projects/tomcat/roles/tomcat/files'*/
                              //    sh 'ssh -o StrictHostKeyChecking=no root@labansible01 uname -a'  
-				  //  bat("pscp.exe D:/pipeline/rm/appcode/dol-public-web/target/dol-public-web-0.0.1-SNAPSHOT.war root@labansible01:/var/lib/awx/projects/tomcat/roles/tomcat/files")
-                              }
+				   bat("pscp.exe D:/pipeline/rm/appcode/dol-public-web/target/dol-public-web-0.0.1-SNAPSHOT.war root@labansible01:/var/lib/awx/projects/tomcat/roles/tomcat/files")
+			       }
+			      }
 			  
 			  }
 		   }
