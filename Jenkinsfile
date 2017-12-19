@@ -99,7 +99,7 @@ pipeline {
 				      sh 'scp -r D:/pipeline/rm/appcode/dol-public-web/target/dol-public-web-0.0.1-SNAPSHOT.war root@labansible01:/var/lib/awx/projects/tomcat/roles/tomcat/files'*/
                              //    sh 'ssh -o StrictHostKeyChecking=no root@labansible01 uname -a'  
 				   bat("pscp.exe D:/pipeline/rm/appcode/dol-public-web/target/dol-public-web-0.0.1-SNAPSHOT.war root@labansible01:/var/lib/awx/projects/tomcat/roles/tomcat/files")
-			       }
+			       //}
 			      }
 			  
 			  }
