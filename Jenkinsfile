@@ -62,6 +62,7 @@ pipeline {
 		             //sh("mvn -P=Batch -Denv=qa clean package")
 		               bat("cd")
 		             // withMaven(maven:'Maven_3_3_9', mavenLocalRepo: '.repository',mavenSettingsConfig:'my-config') {
+	                     
 			      bat("mvn -Dmaven.repo.local=D:/pipeline/rm/.repository ${MVN_GOAL} -Denv=local -P=Public")
 				archive "./dol-public-web/target/*.war" 
 				
@@ -85,13 +86,25 @@ pipeline {
                   }
 	      }
 	   
+	   
+	   
 	    stage("Send artifacts")
 	       {
 		      steps {
+			     
+			withCredentials([[$class: 'UsernamePasswordBinding', credentialsId: '0ca1c416-5c49-43dd-844b-d3e28ce1d7ff', variable: 'USER']])
+			      {
+			        echo %USERNAME%
+				bat ("C:\Users\svcwasadmin\.ssh")
+				bat ("pwd")
+				bat ("scp D:/pipeline/rm/appcode/dol-public-web/target/dol-public-web-0.0.1-SNAPSHOT.war svcwasadmin@labansible01:/var/lib/awx/projects/tomcat/roles/tomcat/files/dol-public-web-0.0.1-SNAPSHOT.war")       
+      			       
+			      }
 			    //ws("D:/")
 			   //   {
-			       sshagent (credentials: ['0ca1c416-5c49-43dd-844b-d3e28ce1d7ff']) {
-				    sh ("scp -r D:/pipeline/rm/appcode/dol-public-web/target/dol-public-web-0.0.1-SNAPSHOT.war svcwasadmin@labansible01:/var/lib/awx/projects/tomcat/roles/tomcat/files/dol-public-web-0.0.1-SNAPSHOT.war")   
+			   //    sshagent (credentials: ['0ca1c416-5c49-43dd-844b-d3e28ce1d7ff']) {
+				       
+				//    sh ("scp -r D:/pipeline/rm/appcode/dol-public-web/target/dol-public-web-0.0.1-SNAPSHOT.war svcwasadmin@labansible01:/var/lib/awx/projects/tomcat/roles/tomcat/files/dol-public-web-0.0.1-SNAPSHOT.war")   
 				       
 				         //sh ("uname")				       
 				  //     sh ("ssh svcwasadmin@labansible01 uname -a")
@@ -105,7 +118,7 @@ pipeline {
                              //    sh 'ssh -o StrictHostKeyChecking=no root@labansible01 uname -a'  
 				  // bat("pscp.exe D:/pipeline/rm/appcode/dol-public-web/target/dol-public-web-0.0.1-SNAPSHOT.war root@labansible01:/var/lib/awx/projects/tomcat/roles/tomcat/files")
 			       //}
-			      }
+			      //}
 			  
 			  }
 		   }
