@@ -95,7 +95,7 @@ pipeline {
 			withCredentials([[$class: 'UsernamePasswordBinding', credentialsId: '0ca1c416-5c49-43dd-844b-d3e28ce1d7ff', variable: 'USER']])
 			      {
 			        echo %USERNAME%
-				bat ("C:\Users\svcwasadmin\.ssh")
+				bat ("C:/Users/svcwasadmin/.ssh")
 				bat ("pwd")
 				bat ("scp D:/pipeline/rm/appcode/dol-public-web/target/dol-public-web-0.0.1-SNAPSHOT.war svcwasadmin@labansible01:/var/lib/awx/projects/tomcat/roles/tomcat/files/dol-public-web-0.0.1-SNAPSHOT.war")       
       			       
