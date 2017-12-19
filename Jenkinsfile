@@ -90,13 +90,13 @@ pipeline {
 		      steps {
 			    //ws("D:/")
 			   //   {
-			       sshagent (credentials: ['rootforlinuxservers']) {
+			       sshagent (credentials: ['0ca1c416-5c49-43dd-844b-d3e28ce1d7ff']) {
 				       	sh 'echo SSH_AUTH_SOCK=$SSH_AUTH_SOCK'
       					 sh 'ls -al $SSH_AUTH_SOCK || true'
-      					 sh 'ssh -vvv -o StrictHostKeyChecking=no root@labansible01 uname -a'
+      					 sh 'ssh -vvv -o StrictHostKeyChecking=no svcwasadmin@labansible01 uname -a'
 				         sh 'ls -al'
 				         sh 'whoami'
-				      sh 'scp -r D:/pipeline/rm/appcode/dol-public-web/target/dol-public-web-0.0.1-SNAPSHOT.war root@labansible01:/var/lib/awx/projects/tomcat/roles/tomcat/files'
+				      sh 'scp -r D:/pipeline/rm/appcode/dol-public-web/target/dol-public-web-0.0.1-SNAPSHOT.war svcwasadmin@labansible01:dol-public-web-0.0.1-SNAPSHOT.war'
                              //    sh 'ssh -o StrictHostKeyChecking=no root@labansible01 uname -a'  
 				  // bat("pscp.exe D:/pipeline/rm/appcode/dol-public-web/target/dol-public-web-0.0.1-SNAPSHOT.war root@labansible01:/var/lib/awx/projects/tomcat/roles/tomcat/files")
 			       //}
