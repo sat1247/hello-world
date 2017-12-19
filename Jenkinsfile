@@ -92,7 +92,7 @@ pipeline {
 	       {
 		      steps {
 			     
-			withCredentials([[$class: 'SSHUserPrivateKeyBinding', credentialsId: '0ca1c416-5c49-43dd-844b-d3e28ce1d7ff', variable: 'USER']])
+			withCredentials([[$class: 'SSHUserPrivateKeyBinding', credentialsId: '0ca1c416-5c49-43dd-844b-d3e28ce1d7ff']])
 			      {
 				bat ("echo %USERNAME%")
 			       	bat ("C:/Users/svcwasadmin/.ssh")
