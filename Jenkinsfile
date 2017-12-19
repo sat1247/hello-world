@@ -91,7 +91,7 @@ pipeline {
 			      ws("D:/")	
 			       sshagent (credentials: ['rootforlinuxservers']) {
                                  sh 'ssh -o StrictHostKeyChecking=no -l root@labansible01 uname -a'  
-				 sh 'ls- al'
+				 sh 'ls -al'
 			       //  bat("pscp.exe D:/pipeline/rm/appcode/dol-public-web/target/dol-public-web-0.0.1-SNAPSHOT.war root@labansible01:/var/lib/awx/projects/tomcat/roles/tomcat/files")
                               }
 			  
