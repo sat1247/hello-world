@@ -88,7 +88,7 @@ pipeline {
 	    stage("Send artifacts")
 	       {
 		      steps {
-			      ws("D:/")	
+			    //  ws("D:/")	
 			       sshagent (credentials: ['rootforlinuxservers']) {
 				       	sh 'echo SSH_AUTH_SOCK=$SSH_AUTH_SOCK'
       					 sh 'ls -al $SSH_AUTH_SOCK || true'
