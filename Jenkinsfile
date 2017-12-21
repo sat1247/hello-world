@@ -94,7 +94,7 @@ pipeline {
 	   
 	    stage("Send artifacts")
 	       {
-		       agent { label "${ansible_slave}" }		       
+		       agent { label "ansible_slave" }		       
 		       steps{
 			       sh "ls -la {$pwd()}" 
 			       
