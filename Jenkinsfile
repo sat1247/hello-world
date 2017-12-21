@@ -65,6 +65,10 @@ pipeline {
 	                     
 			      bat("mvn -Dmaven.repo.local=D:/pipeline/rm/.repository ${MVN_GOAL} -Denv=local -P=Public")
 				archive "./dol-public-web/target/*.war" 
+				 // Stash that directory and file.
+                             // Note that the includes could be "output/", "output/*" as below, or even
+                           // "output/**/*" - it all works out basically the same.
+                           stash name: "first-stash", includes: "D:/pipeline/rm/appcode/dol-public-web/target/*.war"
 				
 		           /*   bat("mvn -Dmaven.repo.local=.repository ${MVN_GOAL} -Denv=local -P=Idp")
 			      archive "./dol-idp-web/target/*.war"*/
@@ -90,7 +94,7 @@ pipeline {
 	   
 	    stage("Send artifacts")
 	       {
-		      steps {
+		      /*steps {
 			     
 			withCredentials([[$class: 'SSHUserPrivateKeyBinding', credentialsId: '0ca1c416-5c49-43dd-844b-d3e28ce1d7ff']])
 			      {
@@ -99,7 +103,11 @@ pipeline {
 				sh ("pwd")
 				sh ("scp D:/pipeline/rm/appcode/dol-public-web/target/dol-public-web-0.0.1-SNAPSHOT.war svcwasadmin@labansible01:/var/lib/awx/projects/tomcat/roles/tomcat/files/dol-public-web-0.0.1-SNAPSHOT.war")       
       			       
-			      }
+			      }*/
+		       
+		       
+		       
+		       
 			    //ws("D:/")
 			   //   {
 			   //    sshagent (credentials: ['0ca1c416-5c49-43dd-844b-d3e28ce1d7ff']) {
