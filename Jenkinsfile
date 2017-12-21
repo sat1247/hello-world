@@ -64,11 +64,16 @@ pipeline {
 		             // withMaven(maven:'Maven_3_3_9', mavenLocalRepo: '.repository',mavenSettingsConfig:'my-config') {
 	                     
 			      bat("mvn -Dmaven.repo.local=D:/pipeline/rm/.repository ${MVN_GOAL} -Denv=local -P=Public")
-				archive "./dol-public-web/target/*.war" 
+			
+				   
+		//	archiveArtifacts artifacts: "dol-public-web/target/*.war", fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true;
+				//archive "./dol-public-web/target/*.war" 
 				 // Stash that directory and file.
                              // Note that the includes could be "output/", "output/*" as below, or even
                            // "output/**/*" - it all works out basically the same.
-                           stash name: "first-stash", includes: "D:/pipeline/rm/appcode/dol-public-web/target/*.war"
+				   
+				   
+                           stash name: "first-stash", includes: "dol-public-web/target/*.war"
 				
 		           /*   bat("mvn -Dmaven.repo.local=.repository ${MVN_GOAL} -Denv=local -P=Idp")
 			      archive "./dol-idp-web/target/*.war"*/
