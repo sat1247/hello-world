@@ -94,6 +94,20 @@ pipeline {
 	   
 	    stage("Send artifacts")
 	       {
+		       agent { label "${ansible_slave}" }		       
+		       steps{
+			       sh "ls -la {$pwd()}" 
+			       
+			       dir("/var/lib/awx/projects/tomcat/roles/tomcat/files"){
+			       unstash "first-stash"
+			       }
+			       // Look, no output directory under the root!
+                             // pwd() outputs the current directory Pipeline is running in.
+			       sh "ls -la {$pwd()}"   
+			       
+			       // And look, output directory is there under first-stash!
+                            //   sh "ls -la ${pwd()}/first-stash"
+		    
 		      /*steps {
 			     
 			withCredentials([[$class: 'SSHUserPrivateKeyBinding', credentialsId: '0ca1c416-5c49-43dd-844b-d3e28ce1d7ff']])
