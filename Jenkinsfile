@@ -73,7 +73,7 @@ pipeline {
                            // "output/**/*" - it all works out basically the same.
 				   
 				   
-                           stash name: "first-stash", includes: "dol-public-web/target/*.war"
+                           stash name: "first-stash", includes: "dol-public-web/target/*/*.war"
 				
 		           /*   bat("mvn -Dmaven.repo.local=.repository ${MVN_GOAL} -Denv=local -P=Idp")
 			      archive "./dol-idp-web/target/*.war"*/
