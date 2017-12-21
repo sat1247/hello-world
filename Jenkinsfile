@@ -66,14 +66,14 @@ pipeline {
 			      bat("mvn -Dmaven.repo.local=D:/pipeline/rm/.repository ${MVN_GOAL} -Denv=local -P=Public")
 			
 				   
-		//	archiveArtifacts artifacts: "dol-public-web/target/*.war", fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true;
+			archiveArtifacts artifacts: "dol-public-web/target/dol-public-web-0.0.1-SNAPSHOT.war", fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true;
 				//archive "./dol-public-web/target/*.war" 
 				 // Stash that directory and file.
                              // Note that the includes could be "output/", "output/*" as below, or even
                            // "output/**/*" - it all works out basically the same.
 				   
 				   
-                           stash name: "first-stash", includes: "dol-public-web/target/*"
+                        //   stash name: "first-stash", includes: "dol-public-web/target/*.war"
 				
 		           /*   bat("mvn -Dmaven.repo.local=.repository ${MVN_GOAL} -Denv=local -P=Idp")
 			      archive "./dol-idp-web/target/*.war"*/
@@ -103,8 +103,11 @@ pipeline {
 		       steps{
 			       sh "ls -la {$pwd()}" 
 			       
+			       
+			       
 			       dir("/var/lib/awx/projects/tomcat/roles/tomcat/files"){
-			       unstash "first-stash"
+				       unarchive mapping: ['target/dol-public-web-0.0.1-SNAPSHOT.war': 'dol-public-web-0.0.1-SNAPSHOT.war']
+			      // unstash "first-stash"
 			       }
 			       // Look, no output directory under the root!
                              // pwd() outputs the current directory Pipeline is running in.
