@@ -1,0 +1,62 @@
+#!groovy
+
+pipeline {
+
+    parameters {
+      string(name: "SLAVE_TARGET", defaultValue: "master", description: "slave machine that responsible to execute tasks")
+	  string(name: "SVN_GOAL", defaultValue: "checkout", description: "")
+	  string(name: "SVN_REPO", defaultValue: "https://atlsvn01/svn/SHWebFramework/branch", description: "")
+	  string(name: "SVN_BRANCH", defaultValue: "dev", description: "")
+	  string(name: "MVN_GOAL", defaultValue: "clean package", description: "")
+	  string(name: "MVN_PROP", defaultValue: "-DskipTests", description: "")
+      string(name: "BUILD_DIR", defaultValue: "D:/pipeline/rmqa", description: "")
+      string(name: "DEPLOY_DIR", defaultValue: "D:/BUILD_Packages/QA/Batch", description: "")	  
+  }
+
+ agent { label "${SLAVE_TARGET}" }
+ 
+  stages {
+  
+     stage("scm-checkout") {
+	   when {
+	      environment name: "SVN_GOAL", value: "checkout"
+	   }
+     steps {
+	     script {
+		   dir("D:/pipeline/rmqa"){
+		   if ("${SVN_BRANCH}" != ""){		     		 
+		        checkout([$class: 'SubversionSCM', additionalCredentials: [], excludedCommitMessages: '', excludedRegions: '', excludedRevprop: '', excludedUsers: '', filterChangelog: false, ignoreDirPropChanges: false, includedRegions: '', locations: [[credentialsId: 'a8b7638d-d411-469e-8d93-40efd4a899cd', depthOption: 'infinity', ignoreExternalsOption: true, local: 'SHWebFramework', remote: 'https://atlsvn01/svn/SHWebFramework/branch/qa']], workspaceUpdater: [$class: 'UpdateUpdater']])
+		   		   echo 'scm checkout is done'
+				   }
+		   else {
+		      echo "please provide svn branch name"
+		   }
+		   }
+		 }
+	   }
+	 }  
+     stage("scm-build")
+	      {
+		      steps {		      
+	               dir("D:/pipeline/rmqa")
+		           {
+		             //sh("mvn -P=Batch -Denv=qa clean package")
+		               bat("cd")
+		             // withMaven(maven:'Maven_3_3_9', mavenLocalRepo: '.repository',mavenSettingsConfig:'my-config') {
+		              bat("mvn -Dmaven.repo.local=-Dmaven.repo.local=C:/.m2/repository  clean package -Denv=local -P=Batch")
+					  stash name: "qa-batch", includes: "./*/target/*.jar"					  							 
+		             //}
+			       }  
+				    dir("D:/BUILD_Packages/QA/Batch1")
+					{
+					    unstash "qa-batch"
+					}
+                  }
+	      } 
+  
+  
+  
+  }
+
+
+}
