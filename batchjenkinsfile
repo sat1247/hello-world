@@ -6,7 +6,7 @@ pipeline {
           string(name: "SLAVE_TARGET", defaultValue: "master", description: "slave machine that responsible to execute tasks")
 	  string(name: "SVN_GOAL", defaultValue: "checkout", description: "")
 	  string(name: "SVN_REPO", defaultValue: "https://atlsvn01/svn/SHWebFramework/branch/", description: "")
-	  string(name: "SVN_BRANCH", defaultValue: "dev", description: "")
+	  string(name: "SVN_BRANCH", defaultValue: "qa", description: "")
 	  string(name: "SVN_CREDS", defaultValue: "a8b7638d-d411-469e-8d93-40efd4a899cd", description: "")
 	  string(name: "MVN_GOAL", defaultValue: "clean package", description: "")
 	  string(name: "MVN_REPO", defaultValue: "C:/.m2/repository", description: "")
