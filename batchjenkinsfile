@@ -44,7 +44,7 @@ pipeline {
 		             //sh("mvn -P=Batch -Denv=qa clean package")
 		               bat("cd")
 		             // withMaven(maven:'Maven_3_3_9', mavenLocalRepo: '.repository',mavenSettingsConfig:'my-config') {
-				   bat("mvn -Dmaven.repo.local=-Dmaven.repo.local=${MVN_REPO}  ${MVN_GOAL} -Denv=qa -P=Batch")
+				   bat("mvn -Dmaven.repo.local=${MVN_REPO}  ${MVN_GOAL} -Denv=qa -P=Batch")
 					  stash name: "qa-batch", includes: "./*/target/*.jar"					  							 
 		             //}
 			       }  
