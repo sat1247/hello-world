@@ -26,7 +26,7 @@ pipeline {
 	     script {
 	       dir("${BUILD_DIR}"){
 		   if ("${SVN_BRANCH}" != ""){		     		 
-		        checkout([$class: 'SubversionSCM', additionalCredentials: [], excludedCommitMessages: '', excludedRegions: '', excludedRevprop: '', excludedUsers: '', filterChangelog: false, ignoreDirPropChanges: false, includedRegions: '', locations: [[credentialsId: '${SVN_CREDS}', depthOption: 'infinity', ignoreExternalsOption: true, local: '.', remote: '${SVN_REPO}${SVN_BRANCH}']], workspaceUpdater: [$class: 'UpdateUpdater']])
+		        checkout([$class: 'SubversionSCM', additionalCredentials: [], excludedCommitMessages: '', excludedRegions: '', excludedRevprop: '', excludedUsers: '', filterChangelog: false, ignoreDirPropChanges: false, includedRegions: '', locations: [[credentialsId: 'a8b7638d-d411-469e-8d93-40efd4a899cd', depthOption: 'infinity', ignoreExternalsOption: true, local: '.', remote: '${SVN_REPO}${SVN_BRANCH}']], workspaceUpdater: [$class: 'UpdateUpdater']])
 		   		   echo 'scm checkout is done'
 				   }
 		   else {
