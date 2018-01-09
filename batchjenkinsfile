@@ -45,15 +45,28 @@ pipeline {
 		               bat("cd")
 		             // withMaven(maven:'Maven_3_3_9', mavenLocalRepo: '.repository',mavenSettingsConfig:'my-config') {
 				   bat("mvn -Dmaven.repo.local=${MVN_REPO}  ${MVN_GOAL} -Denv=qa -P=Batch")
-					  stash name: "qa-batch", includes: "./*/target/*.jar"					  							 
+				//	  stash name: "qa-batch", includes: "./*/target/*.jar"					  							 
 		             //}
 			       }  
-			      dir("${DEPLOY_DIR}")
+			  /*    dir("${DEPLOY_DIR}")
 					{
 					    unstash "qa-batch"
-					}
+					}*/
                   }
 	      } 
+	  
+	  stage("DeployArtifacts")
+	       {
+		      steps {
+			            dir("C:/Users/svcbuild/.ssh")
+						{
+						bat ("scp -o StrictHostKeyChecking=no -i ./id_rsa D:/pipeline/rmqa/SHWebFramework/target/dol-batch-0.0.1-SNAPSHOT.jar svcbuild@devlinupld01:/home/aa0168")
+						
+						}
+                         
+
+			  }
+			  }
   
   
   
