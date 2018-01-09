@@ -60,7 +60,7 @@ pipeline {
 		      steps {
 			            dir("C:/Users/svcbuild/.ssh")
 						{
-						bat ("scp -o StrictHostKeyChecking=no -i ./id_rsa D:/pipeline/rmqa/SHWebFramework/dol-batch/target/dol-batch-0.0.1-SNAPSHOT.jar svcbuild@devlinupld01:/home/aa0168")
+						bat ("scp -o StrictHostKeyChecking=no -i ./id_rsa D:/pipeline/rmqa/SHWebFramework/dol-batch/target/dol-batch-0.0.1-SNAPSHOT.jar aa0168@devlinupld01:/GDOL-Batch/lib)
 						
 						}
                          
