@@ -10,10 +10,12 @@ pipeline {
 	  string(name: "SVN_CREDS", defaultValue: "a8b7638d-d411-469e-8d93-40efd4a899cd", description: "")
 	  string(name: "MVN_GOAL", defaultValue: "clean package", description: "")
 	  string(name: "MVN_REPO", defaultValue: "C:/.m2/repository", description: "")
-          string(name: "BUILD_DIR", defaultValue: "D:/pipeline/rmdev/SHWebFramework", description: "")
-          string(name: "DEPLOY_DIR", defaultValue: "D:/BUILD_Packages/DEV/Batch", description: "")
+          string(name: "BUILD_DIR", defaultValue: "D:/pipeline/rmdev/SHWebFramework", description: "")         
 	  string(name: "MVN_ENV", defaultValue: "dev", description: "")
 	  string(name: "MVN_PROFILE", defaultValue: "Batch", description: "")
+	  string(name: "DEPLOY_DIR", defaultValue: "D:/BUILD_Packages/DEV/Batch", description: "")
+	  string(name: "DEPLOY_SERVER", defaultValue: "devlinupld01", description: "")
+	    
 	    
   }
 
@@ -63,8 +65,15 @@ pipeline {
 		      steps {
 			            dir("C:/Users/svcbuild/.ssh")
 						{
-						bat ("scp -o StrictHostKeyChecking=no -i ./id_rsa D:/pipeline/rmdev/SHWebFramework/dol-batch/target/dol-batch-0.0.1-SNAPSHOT.jar svcbuild@devlinupld01:/GDOL-Batch/lib/")
-						
+						bat ("scp -o StrictHostKeyChecking=no -i ./id_rsa ${BUILD_DIR}/dol-batch/target/dol-batch-0.0.1-SNAPSHOT.jar svcbuild@${DEPLOY_SERVER}:/GDOL-Batch/lib/")
+						bat ("scp -o StrictHostKeyChecking=no -i ./id_rsa ${BUILD_DIR}/dol-commons/target/dol-commons-0.0.1-SNAPSHOT.jar svcbuild@${DEPLOY_SERVER}:/GDOL-Batch/lib/")
+						bat ("scp -o StrictHostKeyChecking=no -i ./id_rsa ${BUILD_DIR}/dol-uitax/target/dol-uitax-0.0.1-SNAPSHOT.jar svcbuild@${DEPLOY_SERVER}:/GDOL-Batch/lib/")
+						bat ("scp -o StrictHostKeyChecking=no -i ./id_rsa ${BUILD_DIR}/dol-data/target/dol-data-0.0.1-SNAPSHOT.jar svcbuild@${DEPLOY_SERVER}:/GDOL-Batch/lib/")
+						bat ("scp -o StrictHostKeyChecking=no -i ./id_rsa ${BUILD_DIR}/dol-core/target/dol-core-0.0.1-SNAPSHOT.jar svcbuild@${DEPLOY_SERVER}:/GDOL-Batch/lib/")
+						bat ("scp -o StrictHostKeyChecking=no -i ./id_rsa ${BUILD_DIR}/dol-es/target/dol-es-0.0.1-SNAPSHOT.jar svcbuild@${DEPLOY_SERVER}:/GDOL-Batch/lib/")
+						bat ("scp -o StrictHostKeyChecking=no -i ./id_rsa ${BUILD_DIR}/dol-uiben/target/dol-uiben-0.0.1-SNAPSHOT.jar svcbuild@${DEPLOY_SERVER}:/GDOL-Batch/lib/")
+						bat ("scp -o StrictHostKeyChecking=no -i ./id_rsa ${BUILD_DIR}/dol-ecm-viewer/target/dol-ecm-viewer-0.0.1-SNAPSHOT.jar svcbuild@${DEPLOY_SERVER}:/GDOL-Batch/lib/")
+						bat ("scp -o StrictHostKeyChecking=no -i ./id_rsa ${BUILD_DIR}/dol-as/target/dol-as-0.0.1-SNAPSHOT.jar svcbuild@${DEPLOY_SERVER}:/GDOL-Batch/lib/")
 						}
                          
 
