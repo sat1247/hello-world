@@ -11,7 +11,10 @@ pipeline {
 	  string(name: "MVN_GOAL", defaultValue: "clean package", description: "")
 	  string(name: "MVN_REPO", defaultValue: "C:/.m2/repository", description: "")
           string(name: "BUILD_DIR", defaultValue: "D:/pipeline/rmqa/SHWebFramework", description: "")
-          string(name: "DEPLOY_DIR", defaultValue: "D:/BUILD_Packages/QA/Batch", description: "")	  
+          string(name: "DEPLOY_DIR", defaultValue: "D:/BUILD_Packages/QA/Batch", description: "")
+	  string(name: "MVN_ENV", defaultValue: "qa", description: "")
+	  string(name: "MVN_PROFILE", defaultValue: "Batch", description: "")
+	    
   }
 
  agent { label "${SLAVE_TARGET}" }
@@ -44,7 +47,7 @@ pipeline {
 		             //sh("mvn -P=Batch -Denv=qa clean package")
 		               bat("cd")
 		             // withMaven(maven:'Maven_3_3_9', mavenLocalRepo: '.repository',mavenSettingsConfig:'my-config') {
-				   bat("mvn -Dmaven.repo.local=${MVN_REPO}  ${MVN_GOAL} -Denv=qa -P=Batch")
+				   bat("mvn -Dmaven.repo.local=${MVN_REPO}  ${MVN_GOAL} -Denv=${MVN_ENV} -P=${MVN_PROFILE}")
 				//	  stash name: "qa-batch", includes: "./*/target/*.jar"					  							 
 		             //}
 			       }  
@@ -58,9 +61,9 @@ pipeline {
 	  stage("DeployArtifacts")
 	       {
 		      steps {
-			            dir("C:/Users/aa0168/.ssh")
+			            dir("C:/Users/svcbuild/.ssh")
 						{
-						bat ("scp -o StrictHostKeyChecking=no -i ./id_rsa D:/pipeline/rmqa/SHWebFramework/dol-batch/target/dol-batch-0.0.1-SNAPSHOT.jar aa0168@devlinupld01:/GDOL-Batch/lib/")
+						bat ("scp -o StrictHostKeyChecking=no -i ./id_rsa D:/pipeline/rmqa/SHWebFramework/dol-batch/target/dol-batch-0.0.1-SNAPSHOT.jar aa0168@qalinupld01:/GDOL-Batch/lib/")
 						
 						}
                          
