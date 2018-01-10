@@ -6,13 +6,13 @@ pipeline {
           string(name: "SLAVE_TARGET", defaultValue: "master", description: "slave machine that responsible to execute tasks")
 	  string(name: "SVN_GOAL", defaultValue: "checkout", description: "")
 	  string(name: "SVN_REPO", defaultValue: "https://atlsvn01/svn/SHWebFramework/branch/", description: "")
-	  string(name: "SVN_BRANCH", defaultValue: "qa", description: "")
+	  string(name: "SVN_BRANCH", defaultValue: "dev", description: "")
 	  string(name: "SVN_CREDS", defaultValue: "a8b7638d-d411-469e-8d93-40efd4a899cd", description: "")
 	  string(name: "MVN_GOAL", defaultValue: "clean package", description: "")
 	  string(name: "MVN_REPO", defaultValue: "C:/.m2/repository", description: "")
-          string(name: "BUILD_DIR", defaultValue: "D:/pipeline/rmqa/SHWebFramework", description: "")
-          string(name: "DEPLOY_DIR", defaultValue: "D:/BUILD_Packages/QA/Batch", description: "")
-	  string(name: "MVN_ENV", defaultValue: "qa", description: "")
+          string(name: "BUILD_DIR", defaultValue: "D:/pipeline/rmdev/SHWebFramework", description: "")
+          string(name: "DEPLOY_DIR", defaultValue: "D:/BUILD_Packages/DEV/Batch", description: "")
+	  string(name: "MVN_ENV", defaultValue: "dev", description: "")
 	  string(name: "MVN_PROFILE", defaultValue: "Batch", description: "")
 	    
   }
@@ -63,7 +63,7 @@ pipeline {
 		      steps {
 			            dir("C:/Users/svcbuild/.ssh")
 						{
-						bat ("scp -o StrictHostKeyChecking=no -i ./id_rsa D:/pipeline/rmqa/SHWebFramework/dol-batch/target/dol-batch-0.0.1-SNAPSHOT.jar aa0168@qalinupld01:/GDOL-Batch/lib/")
+						bat ("scp -o StrictHostKeyChecking=no -i ./id_rsa D:/pipeline/rmdev/SHWebFramework/dol-batch/target/dol-batch-0.0.1-SNAPSHOT.jar svcbuild@devlinupld01:/GDOL-Batch/lib/")
 						
 						}
                          
