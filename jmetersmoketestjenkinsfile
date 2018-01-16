@@ -15,12 +15,10 @@ pipeline {
 	   {
 	   steps
 	   {
-		   tools {
-		     antHome 'ant'
-		   }
-		dir('C:/jmeter/extras') 
+		  dir('C:/jmeter/extras') 
 		  {
-     		       bat "pushd c:\\jmeter\\extras && ${antHome}\\bin\\ant -f build.xml"
+			 // def antHome = tool 'ant'
+     		       bat "pushd c:\\jmeter\\extras && c:\\ant\\bin\\ant -f build.xml"
        			step([$class: 'ArtifactArchiver', artifacts: 'devtestreport.html', fingerprint: true])
            }   
 	   }
