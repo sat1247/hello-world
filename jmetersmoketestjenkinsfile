@@ -1,0 +1,25 @@
+#!groovy
+
+pipeline {
+
+    parameters {
+      string(name: "SLAVE_TARGET", defaultValue: "master", description: "slave machine that responsible to execute tasks")
+	  string(name: "BUILD_DIR", defaultValue: "D:/Testing/jmeter", description: "")
+      string(name: "DEPLOY_DIR", defaultValue: "D:/BUILD_Packages/QA/Batch", description: "")	  
+  }
+  
+   agent { label "${SLAVE_TARGET}" }
+   
+   stages {
+   
+      stage("smoke test"){
+	   steps{
+	   dir("$BUILD_DIR")
+		  {
+		   bat ("C:\jmeter\bin\jmeter.bat -Jjmeter.save.saveservice.output_format=xml -n -t D:\Testing\jmeter\urltestscript.jmx -l devtestreport.jtl")
+		  }	   
+	   }
+	  
+	  }
+     
+   }
