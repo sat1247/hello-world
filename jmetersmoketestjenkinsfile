@@ -12,7 +12,7 @@ pipeline {
    
    stages {
    
-      stage("smoke test"){
+    /*  stage("smoke test"){
 	   steps{
 	   dir("$BUILD_DIR")
 	  {
@@ -21,7 +21,18 @@ pipeline {
 	  }	   
 	   }
 	  
-	  }
+	  }*/
+	   stage("publish Resullts with ant")
+	   {
+	   steps
+	   {
+		ws('c:\\jmeter\\extras') {
+     					 def antHome = tool 'ant'
+      			 bat "pushd c:\\jmeter\\extras && ${antHome}\\bin\\ant -f build.xml"
+       			step([$class: 'ArtifactArchiver', artifacts: 'devtestreport.html', fingerprint: true])
+           }   
+	   }
+	   } 
      
    }
 	
