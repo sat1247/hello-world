@@ -17,6 +17,7 @@ pipeline {
 	   dir("$BUILD_DIR")
 	  {
 		   bat ("C:/jmeter/bin/jmeter.bat -Jjmeter.save.saveservice.output_format=xml -n -t D:/Testing/jmeter/urltestscript.jmx -l devtestreport.jtl")
+	           step([$class: 'ArtifactArchiver', artifacts: '**/*.jtl, **/jmeter.log'])
 	  }	   
 	   }
 	  
