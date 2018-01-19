@@ -19,8 +19,10 @@ pipeline {
 		  {
 			 // def antHome = tool 'ant'
      		     //  bat "pushd c:\\jmeter\\extras && c:\\ant\\bin\\ant -f build.xml"
+			  //step([$class: 'ArtifactArchiver', artifacts: 'devtestreport.html', fingerprint: true])
 			    bat ("C:/jmeter/bin/jmeter.bat -Jjmeter.save.saveservice.output_format=xml -n -t D:/Testing/jmeter/urltestscript.jmx -l C:/jmeter/extras/devtestreport.jtl")
-       			step([$class: 'ArtifactArchiver', artifacts: 'devtestreport.html', fingerprint: true])
+			   step([$class: 'ArtifactArchiver', artifacts: '**/*.jtl, **/jmeter.log'])
+       			
            }   
 	   }
 	   } 
