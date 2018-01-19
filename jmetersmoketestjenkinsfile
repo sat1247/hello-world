@@ -26,7 +26,7 @@ pipeline {
 			  
 			  bat (script: "C:/jmeter/bin/jmeter.bat -Jjmeter.save.saveservice.output_format=xml -n -t D:/Testing/jmeter/urltestscript.jmx -l D:/Testing/jmeter/devtestreport.jtl", returnStdout: false)
 			  step([$class: 'ArtifactArchiver', artifacts: '**/*.jtl, **/jmeter.log'])
-			  performanceReport parsers: [[$class: 'JMeterParser', glob: "devtestreport.jtl"]], errorFailedThreshold: 1, errorUnstableThreshold: 1, ignoreFailedBuild: false, ignoreUnstableBuild: false, relativeFailedThresholdNegative: 0, relativeFailedThresholdPositive: 0, relativeUnstableThresholdNegative: 0, relativeUnstableThresholdPositive: 0
+			  performanceReport parsers: [[$class: 'JMeterParser', glob: "devtestreport.jtl"]], errorFailedThreshold: 1, errorUnstableThreshold: 1,  relativeFailedThresholdNegative: 0, relativeFailedThresholdPositive: 0, relativeUnstableThresholdNegative: 0, relativeUnstableThresholdPositive: 0
   
        			
            }   
