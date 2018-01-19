@@ -20,10 +20,13 @@ pipeline {
 			 // def antHome = tool 'ant'
      		     //  bat "pushd c:\\jmeter\\extras && c:\\ant\\bin\\ant -f build.xml"
 			  //step([$class: 'ArtifactArchiver', artifacts: 'devtestreport.html', fingerprint: true])
-			 bat ("C:/jmeter/bin/jmeter.bat -Jjmeter.save.saveservice.output_format=xml -n -t D:/Testing/jmeter/urltestscript.jmx -l D:/Testing/jmeter/devtestreport.jtl")
-	          step([$class: 'ArtifactArchiver', artifacts: '**/*.jtl, **/jmeter.log'])
+			// bat ("C:/jmeter/bin/jmeter.bat -Jjmeter.save.saveservice.output_format=xml -n -t D:/Testing/jmeter/urltestscript.jmx -l D:/Testing/jmeter/devtestreport.jtl")
+	         
 			//  perfReport 'devtestreport.csv'
-			performanceReport parsers: [[$class: 'JMeterParser', glob: "devtestreport.jtl"]], errorFailedThreshold: 1, errorUnstableThreshold: 1, ignoreFailedBuild: false, ignoreUnstableBuild: false, relativeFailedThresholdNegative: 0, relativeFailedThresholdPositive: 0, relativeUnstableThresholdNegative: 0, relativeUnstableThresholdPositive: 0
+			  
+			  bat (script: "C:/jmeter/bin/jmeter.bat -Jjmeter.save.saveservice.output_format=xml -n -t D:/Testing/jmeter/urltestscript.jmx -l D:/Testing/jmeter/devtestreport.jtl", returnStdout: false)
+			  step([$class: 'ArtifactArchiver', artifacts: '**/*.jtl, **/jmeter.log'])
+			  performanceReport parsers: [[$class: 'JMeterParser', glob: "devtestreport.jtl"]], errorFailedThreshold: 1, errorUnstableThreshold: 1, ignoreFailedBuild: false, ignoreUnstableBuild: false, relativeFailedThresholdNegative: 0, relativeFailedThresholdPositive: 0, relativeUnstableThresholdNegative: 0, relativeUnstableThresholdPositive: 0
   
        			
            }   
