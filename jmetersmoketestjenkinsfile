@@ -28,7 +28,7 @@ pipeline {
 			  step([$class: 'ArtifactArchiver', artifacts: '**/*.jtl, **/jmeter.log'])
 			  // perfReport 'devtestreport.jtl'
 			   perfReport 'devtestreport.csv'
-			  performanceReport parsers: [[$class: 'JMeterParser', glob: "devtestreport.xml"]], errorFailedThreshold: 1, errorUnstableThreshold: 1,  relativeFailedThresholdNegative: 0, relativeFailedThresholdPositive: 0, relativeUnstableThresholdNegative: 0, relativeUnstableThresholdPositive: 0
+			//  performanceReport parsers: [[$class: 'JMeterParser', glob: "devtestreport.xml"]], errorFailedThreshold: 1, errorUnstableThreshold: 1,  relativeFailedThresholdNegative: 0, relativeFailedThresholdPositive: 0, relativeUnstableThresholdNegative: 0, relativeUnstableThresholdPositive: 0
   
        			
            }   
