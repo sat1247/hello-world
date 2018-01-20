@@ -1,0 +1,42 @@
+node {
+   
+       stage("Run JMeter command") {
+     //   bat "jmeter --version"
+        bat "C:/jmeter/bin/jmeter.bat -n -J jmeter.save.saveservice.output_format=xml -t D:/Testing/jmeter/urltestscript.jmx -l D:/Testing/jmeter/urltestscript/jmetertest.jtl -j D:/Testing/jmeter/urltestscript/jmetertest.log"
+    }
+
+    stage("Process JTL logs") {
+        println "Test processing logs"
+        /*
+         * Use the Performance Plugin to process the .jtl log file.
+         */
+         dir("D:/Testing/jmeter")
+         {
+           bat "pwd"
+          performanceReport compareBuildPrevious: true,
+                          configType: 'ART',
+                          errorFailedThreshold: 100,
+                          errorUnstableResponseTimeThreshold: '',
+                          errorUnstableThreshold: 100,
+                          failBuildIfNoResultFile: false,
+                          modeOfThreshold: false,
+                          modePerformancePerTestCase: true,
+                          modeThroughput: true,
+                          nthBuildNumber: 0,
+                          parsers: [[$class: 'JMeterParser', glob: 'D:/Testing/jmeter/urltestscript/*.jtl']],
+                          relativeFailedThresholdNegative: 0,
+                          relativeFailedThresholdPositive: 0,
+                          relativeUnstableThresholdNegative: 0,
+                          relativeUnstableThresholdPositive: 0
+         }
+    }
+
+    stage("Archive log files") {
+        archiveArtifacts '**/*.jtl **/*.log'
+    }
+
+    stage("Cleanup") {
+        // Wipe the workspace so we are building completely clean
+     //   deleteDir()
+    }
+}
